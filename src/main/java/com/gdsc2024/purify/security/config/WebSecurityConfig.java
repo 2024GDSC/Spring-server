@@ -58,7 +58,7 @@ public class WebSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
         http
                 .csrf(CsrfConfigurer::disable)
                 .httpBasic(HttpBasicConfigurer::disable)
-                .authorizeHttpRequests((authorizeRequests) -> {
+                .authorizeHttpRequests((authorizeRequests) -> { // 올바르게 작동하도록 chaining method 아닌 각각 설정 수정
                     authorizeRequests.requestMatchers("/member/admin").hasRole("ADMIN");
                     authorizeRequests.requestMatchers("/member/simulator").hasRole("SIMULATOR");
                     authorizeRequests.requestMatchers("/member/viewer").hasRole("VIEWER");

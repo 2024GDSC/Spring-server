@@ -7,7 +7,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자 접근 x
 @Table(name = "members")
 public class Member extends BaseTimeEntity {
     @Id
