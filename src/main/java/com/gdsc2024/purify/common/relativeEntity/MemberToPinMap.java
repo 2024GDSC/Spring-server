@@ -5,6 +5,7 @@ import com.gdsc2024.purify.member.domain.Member;
 import com.gdsc2024.purify.pinMap.domain.PinMap;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,10 @@ public class MemberToPinMap {
     @JsonBackReference
     private PinMap pinMap;
 
+    @Builder
+    public MemberToPinMap(Long memberToPinMapId, Member member, PinMap pinMap) {
+        this.memberToPinMapId = memberToPinMapId;
+        this.member = member;
+        this.pinMap = pinMap;
+    }
 }

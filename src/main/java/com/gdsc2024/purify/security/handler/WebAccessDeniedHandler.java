@@ -23,7 +23,6 @@ public class WebAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json;charset=UTF-8");
         response.setCharacterEncoding("utf-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
         HashMap<String, Object> json = new HashMap<>();
         json.put("statusCode", statusCode.getStatusCode());
         json.put("message", statusCode.getMessage());
