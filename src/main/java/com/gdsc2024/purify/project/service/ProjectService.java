@@ -6,9 +6,11 @@ import com.gdsc2024.purify.project.dto.ResProjectDto;
 import com.gdsc2024.purify.security.dto.AuthorizerDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProjectService {
     void createProject(ReqProjectCreateDto reqProjectCreateDto, AuthorizerDto authorizerDto);
 
     List<ResProjectDto> getProjects(AuthorizerDto authorizerDto);
+
 }

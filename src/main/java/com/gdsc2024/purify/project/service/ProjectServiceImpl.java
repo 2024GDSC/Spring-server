@@ -55,7 +55,6 @@ public class ProjectServiceImpl implements ProjectService{
                     memberToProjectRepository.save(sharedMemberToProject);
                 }
         );
-
         memberToProjectRepository.save(memberToProject);
     }
 
