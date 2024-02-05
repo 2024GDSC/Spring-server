@@ -34,7 +34,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         if(isTokenValid(request, accessToken)) {
             setAuthentication(accessToken, request);
         }
-
         chain.doFilter(request, response);
     }
 
@@ -49,9 +48,9 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     }
 
     private JwtAuthenticationToken getAuthenticationToken(Claims claims, ServletRequest request) {
-        String username = claims.getSubject();
+        String email = claims.getSubject();
         List<GrantedAuthority> authorities = Collections.emptyList();
-        JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(username, null, authorities, claims);
+        JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(email, null, authorities, claims);
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest) request));
         return authenticationToken;
     }
