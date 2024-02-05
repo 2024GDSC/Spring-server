@@ -15,15 +15,13 @@ public class ResProjectDto {
     private String description;
     private ProjectStatus projectStatus;
     private Timestamp createdTime;
-    private Boolean isMine;
 
     @Builder
-    public ResProjectDto(Long projectId, String title, String description, ProjectStatus projectStatus, Timestamp createdTime, Boolean isMine) {
+    public ResProjectDto(Long projectId, String title, String description, ProjectStatus projectStatus, Timestamp createdTime) {
         this.projectId = projectId;
         this.title = title;
         this.description = description;
         this.projectStatus = projectStatus;
         this.createdTime = createdTime;
-        this.isMine = isMine;
     }
 }

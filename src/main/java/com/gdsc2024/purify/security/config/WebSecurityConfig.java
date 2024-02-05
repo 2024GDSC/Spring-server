@@ -64,6 +64,7 @@ public class WebSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
 //                    authorizeRequests.requestMatchers("/member/viewer").hasRole("VIEWER");
                     authorizeRequests.requestMatchers("/member/m/**").authenticated();
                     authorizeRequests.requestMatchers("/project/**").authenticated();
+                    authorizeRequests.requestMatchers("/pinMap/**").authenticated();
                     authorizeRequests.requestMatchers("/member/**").permitAll();
 
                 })
