@@ -1,10 +1,12 @@
 package com.gdsc2024.purify.project.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.gdsc2024.purify.baseTime.BaseTimeEntity;
 import com.gdsc2024.purify.common.relativeEntity.MemberToProject;
 import com.gdsc2024.purify.member.domain.Member;
 import com.gdsc2024.purify.member.enums.MemberRole;
 import com.gdsc2024.purify.pinMap.domain.PinMap;
+import com.gdsc2024.purify.project.dto.ResProjectDto;
 import com.gdsc2024.purify.project.enums.ProjectStatus;
 import com.gdsc2024.purify.request.domain.Request;
 import jakarta.persistence.*;
@@ -20,7 +22,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자 접근 x
 @Table(name = "projects")
-public class Project {
+public class Project extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id", nullable = false)
@@ -59,4 +61,15 @@ public class Project {
         this.description = description;
         this.status = status;
     }
+
+    public ResProjectDto toDto() {
+        return ResProjectDto.builder()
+                .projectId(this.projectId)
+                .title(this.title)
+                .description(this.description)
+                .projectStatus(this.status)
+                .createdTime(this.getCreateDate())
+                .build();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.gdsc2024.purify.pinMap.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.gdsc2024.purify.baseTime.BaseTimeEntity;
 import com.gdsc2024.purify.common.relativeEntity.MemberToPinMap;
 import com.gdsc2024.purify.member.enums.MemberRole;
 import com.gdsc2024.purify.pin.domain.Pin;
@@ -20,7 +21,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자 접근 x
 @Table(name = "pinMaps")
-public class PinMap {
+public class PinMap extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pin_map_id", nullable = false)

@@ -1,6 +1,7 @@
 package com.gdsc2024.purify.request.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.gdsc2024.purify.baseTime.BaseTimeEntity;
 import com.gdsc2024.purify.member.domain.Member;
 import com.gdsc2024.purify.pinMap.domain.PinMap;
 import com.gdsc2024.purify.project.domain.Project;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자 접근 x
 @Table(name = "requests")
-public class Request {
+public class Request extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "request_id", nullable = false)
