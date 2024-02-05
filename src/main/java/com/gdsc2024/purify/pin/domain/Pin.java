@@ -1,6 +1,7 @@
 package com.gdsc2024.purify.pin.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.gdsc2024.purify.baseTime.BaseTimeEntity;
 import com.gdsc2024.purify.member.enums.MemberRole;
 import com.gdsc2024.purify.pin.enums.PinTypes;
 import com.gdsc2024.purify.pinMap.domain.PinMap;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자 접근 x
 @Table(name = "Pins")
-public class Pin {
+public class Pin extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pin_id", nullable = false)

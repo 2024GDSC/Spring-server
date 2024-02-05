@@ -16,14 +16,15 @@ import static com.gdsc2024.purify.security.JwtInfoExtractor.getAuthorizer;
 public class ProjectController {
     private final ProjectService projectService;
 
+    @GetMapping("/")
+    public ResponseEntity<Message> listUpProject() {
+        return ResponseEntity.ok(new Message(StatusCode.OK, projectService.getProjects(getAuthorizer())));
+    }
     @PostMapping("/create")
     public ResponseEntity<Message> generateProject(@RequestBody ReqProjectCreateDto reqProjectCreateDto) {
         projectService.createProject(reqProjectCreateDto, getAuthorizer());
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
 
-//    @GetMapping("/mark/suiteroom")
-//    public ResponseEntity<Message> listUpMarkOfSuiteRoom() {
-//        return ResponseEntity.ok(new Message(StatusCode.OK, markService.getMarkOfSuiteRoom(getSuiteAuthorizer().getMemberId())));
-//    }
+
 }
