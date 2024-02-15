@@ -6,7 +6,9 @@ import com.gdsc2024.purify.baseTime.BaseTimeEntity;
 import com.gdsc2024.purify.common.relativeEntity.MemberToPinMap;
 import com.gdsc2024.purify.member.enums.MemberRole;
 import com.gdsc2024.purify.pin.domain.Pin;
+import com.gdsc2024.purify.pinMap.dto.ResPinMapDto;
 import com.gdsc2024.purify.project.domain.Project;
+import com.gdsc2024.purify.project.dto.ResProjectDto;
 import com.gdsc2024.purify.request.domain.Request;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -50,9 +52,19 @@ public class PinMap extends BaseTimeEntity {
     private List<Request> requests = new ArrayList<>();
 
     @Builder
-    public PinMap(Long pinMapId, String title, String location) {
+    public PinMap(Long pinMapId, String title, String location, Project project) {
         this.pinMapId = pinMapId;
         this.title = title;
         this.location = location;
+        this.project = project;
+    }
+
+    public ResPinMapDto toDto() {
+        return ResPinMapDto.builder()
+                .pinMapId(this.pinMapId)
+                .title(this.title)
+                .location(this.location)
+                .project(this.project)
+                .build();
     }
 }

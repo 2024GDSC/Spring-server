@@ -25,4 +25,5 @@ public class ProjectController {
         projectService.createProject(reqProjectCreateDto, getAuthorizer());
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
+
 }

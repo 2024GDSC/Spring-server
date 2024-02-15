@@ -7,6 +7,7 @@ import com.gdsc2024.purify.handler.StatusCode;
 import com.gdsc2024.purify.member.domain.Member;
 import com.gdsc2024.purify.member.enums.MemberRole;
 import com.gdsc2024.purify.member.repository.MemberRepository;
+import com.gdsc2024.purify.pinMap.domain.PinMap;
 import com.gdsc2024.purify.project.domain.Project;
 import com.gdsc2024.purify.project.dto.ReqProjectCreateDto;
 import com.gdsc2024.purify.project.dto.ResProjectDto;
@@ -56,6 +57,11 @@ public class ProjectServiceImpl implements ProjectService{
                 }
         );
         memberToProjectRepository.save(memberToProject);
+    }
+
+    @Override
+    public PinMap getSimulation() {
+        return null;
     }
 
     @Override

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MemberToPinMapRepository extends JpaRepository<MemberToProject, Long> {
-    List<MemberToPinMap> findMemberToProjectByMember_MemberIdAndAndProject_ProjectId(Long memberId, Long projectId);
+public interface MemberToPinMapRepository extends JpaRepository<MemberToPinMap, Long> {
+    List<MemberToPinMap> findByMember_MemberId(Long memberId);
+
+    List<MemberToPinMap> findByMember_MemberIdAndPinMap_PinMapId(Long memberId, Long projectId);
 }
