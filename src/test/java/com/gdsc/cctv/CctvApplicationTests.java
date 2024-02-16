@@ -1,10 +1,10 @@
-package com.gdsc2024.purify;
+package com.gdsc.cctv;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PurifyApplicationTests {
+class CctvApplicationTests {
 
 	@Test
 	void contextLoads() {
