@@ -22,9 +22,6 @@ public class Request extends BaseTimeEntity {
     @Column(name = "request_id", nullable = false)
     private Long requestId;
 
-    @Column(name = "type")
-    private String type;
-
     @Column(name = "description")
     private String description;
 
@@ -46,10 +43,21 @@ public class Request extends BaseTimeEntity {
 
 
     @Builder
-    public Request(Long requestId, String type, String description, RequestStatus status) {
+    public Request(Long requestId, String description, RequestStatus status) {
         this.requestId = requestId;
-        this.type = type;
         this.description = description;
         this.status = status;
     }
+
+    public void addProject(Project project) {
+        this.project = project;
+    }
+    public void addPinMap(PinMap pinMap) {
+        this.pinMap = pinMap;
+    }
+    public void addMember(Member member) {
+        this.member = member;
+    }
+
 }
+
