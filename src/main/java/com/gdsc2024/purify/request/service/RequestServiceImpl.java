@@ -17,6 +17,8 @@ import com.gdsc2024.purify.security.dto.AuthorizerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService{
@@ -39,8 +41,9 @@ public class RequestServiceImpl implements RequestService{
 
         if(reqRequestCreateDto.getPinMapId() == -1) request.addProject(project);
         if(reqRequestCreateDto.getPinMapId() != -1) {
-            PinMap pinMap = pinMapRepository.findPinMapByPinMapId(reqRequestCreateDto.getPinMapId()).orElseThrow(() -> {throw new CustomException(StatusCode.NOT_FOUND);});
-            request.addPinMap(pinMap);
+            List<PinMap> pinMap = pinMapRepository.findPinMapByPinMapId(reqRequestCreateDto.getPinMapId());
+            if (pinMap.size() == 0) throw new CustomException(StatusCode.NOT_FOUND);
+            request.addPinMap(pinMap.get(0));
         }
         System.out.println(request.getStatus().getClass());
         requestRepository.save(request);

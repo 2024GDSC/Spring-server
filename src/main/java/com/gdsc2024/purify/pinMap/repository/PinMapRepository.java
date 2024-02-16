@@ -13,4 +13,5 @@ public interface PinMapRepository extends JpaRepository<PinMap, Long> {
 
     List<PinMap> findPinMapByPinMapId(Long pinMapId);
 
+
 }
