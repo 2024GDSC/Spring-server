@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface PinMapRepository extends JpaRepository<PinMap, Long> {
     List<PinMap> findPinMapByProject_ProjectId(Long projectId);
 
-    Optional<PinMap> findPinMapByPinMapId(Long pinMapId);
+    List<PinMap> findPinMapByPinMapId(Long pinMapId);
 
 }
