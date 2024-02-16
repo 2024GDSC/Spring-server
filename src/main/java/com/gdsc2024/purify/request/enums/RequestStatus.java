@@ -6,5 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum RequestStatus {
-    OPEN;
+    DELETE,
+    TERMINATE;
 }
