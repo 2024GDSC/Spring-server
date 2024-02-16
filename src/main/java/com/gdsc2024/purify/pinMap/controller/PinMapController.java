@@ -58,4 +58,5 @@ public class PinMapController {
         pinMapService.transferPinMap(pinMapIdHash.get("pinMapId"), projectIdHash.get("projectId"));
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
+    
 }
