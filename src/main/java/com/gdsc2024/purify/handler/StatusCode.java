@@ -16,7 +16,7 @@ public enum StatusCode {
     FORBIDDEN_CREATING(403, "동일한 이름의 프로젝트가 이미 존재합니다.", HttpStatus.FORBIDDEN),
     FORBIDDEN_REQUEST_TWICE(403, "이미 친구 신청을 보낸 사용자입니다.", HttpStatus.FORBIDDEN),
     UNAUTHORIZED (400, "로그인 후 이용가능합니다.", HttpStatus.UNAUTHORIZED),
-    EXPIRED_JWT(400, "기존 토큰이 만료되었습니다. 해당 토큰을 가지고 /token/refresh 링크로 이동 후 토큰을 재발급 받으세요.", HttpStatus.UNAUTHORIZED),
+    EXPIRED_JWT(400, "기존 토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),
     RE_LOGIN(400, "모든 토큰이 만료되었습니다. 다시 로그인해주세요.", HttpStatus.UNAUTHORIZED),
     FAILED_SIGNUP(400, "회원가입에 실패하였습니다.", HttpStatus.BAD_REQUEST),
 
