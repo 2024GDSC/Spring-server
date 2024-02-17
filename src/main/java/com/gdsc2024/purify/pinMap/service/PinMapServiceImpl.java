@@ -63,14 +63,16 @@ public class PinMapServiceImpl implements PinMapService{
     }
 
     @Override
-    public void simulatePinMap(Long pinMapIdHash) {
+    public void savePinMap(Long pinMapId, ReqPinMapCreateDto reqPinMapCreateDto, AuthorizerDto authorizerDto) {
+        if (!authorizerDto.getRole().equals(MemberRole.SIMULATOR.name())) throw new CustomException(StatusCode.FORBIDDEN);
 
+        PinMap pinMap = pinMapRepository.findById(pinMapId).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+        pinMap.getPins().clear();
+        pinMap.getPins().addAll(reqPinMapCreateDto.);
+
+        pinMapRepository.save(pinMap);
     }
 
-    @Override
-    public PinMap getSimulation(Long pinMapId) {
-        return null;
-    }
 
     @Override
     @Transactional
@@ -89,6 +91,20 @@ public class PinMapServiceImpl implements PinMapService{
                 .build();
 
         pinMapRepository.save(updatePinMap);
+    }
+
+    @Override
+    public PinMap readPinMap(Long pinMapId, AuthorizerDto authorizerDto) {
+        PinMap pinMap = pinMapRepository.findById(pinMapId)
+                .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND));
+
+        if (authorizerDto.getRole().equals(MemberRole.VIEWER.name()) ||
+                authorizerDto.getRole().equals(MemberRole.SIMULATOR.name())) {
+            memberToProjectRepository.findByMember_MemberId(authorizerDto.getMemberId()).stream()
+                    .filter(mtp -> mtp.getProject().getStatus() == ProjectStatus.PRIVATE)
+                    .forEach(mtp -> resProjectDtos.add(mtp.getProject().toDto()));
+        }
+        return pinMap;
     }
 
     @Override

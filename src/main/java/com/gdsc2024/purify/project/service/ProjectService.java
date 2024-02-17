@@ -12,7 +12,5 @@ import java.util.Optional;
 public interface ProjectService {
     void createProject(ReqProjectCreateDto reqProjectCreateDto, AuthorizerDto authorizerDto);
 
-    PinMap getSimulation();
-
     List<ResProjectDto> getProjects(AuthorizerDto authorizerDto);
 }

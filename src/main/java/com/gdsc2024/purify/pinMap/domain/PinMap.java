@@ -52,11 +52,13 @@ public class PinMap extends BaseTimeEntity {
     private List<Request> requests = new ArrayList<>();
 
     @Builder
-    public PinMap(Long pinMapId, String title, String location, Project project) {
+    public PinMap(Long pinMapId, String title, String location, Project project, List<Pin> pins, List<Request> requests) {
         this.pinMapId = pinMapId;
         this.title = title;
         this.location = location;
         this.project = project;
+        this.pins = pins;
+        this.requests = requests;
     }
 
     public ResPinMapDto toDto() {

@@ -2,15 +2,20 @@ package com.gdsc2024.purify.pinMap.controller;
 
 import com.gdsc2024.purify.common.dto.Message;
 import com.gdsc2024.purify.handler.StatusCode;
+import com.gdsc2024.purify.pin.domain.Pin;
+import com.gdsc2024.purify.pin.dto.ReqPinCreateDto;
+import com.gdsc2024.purify.pin.service.PinService;
 import com.gdsc2024.purify.pinMap.dto.ReqPinMapCreateDto;
 import com.gdsc2024.purify.pinMap.service.PinMapService;
 import com.gdsc2024.purify.project.service.ProjectService;
+import com.gdsc2024.purify.security.dto.AuthorizerDto;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static com.gdsc2024.purify.security.JwtInfoExtractor.getAuthorizer;
 
@@ -18,6 +23,7 @@ import static com.gdsc2024.purify.security.JwtInfoExtractor.getAuthorizer;
 @RestController
 @RequestMapping("/pinMap")
 public class PinMapController {
+    private final PinService pinService;
     private final PinMapService pinMapService;
     private final ProjectService projectService;
 
@@ -28,7 +34,7 @@ public class PinMapController {
 
     @PostMapping("/create")
     public ResponseEntity<Message> createPinMap(@RequestBody ReqPinMapCreateDto reqPinMapCreateDto) {
-        pinMapService.createPinMap(reqPinMapCreateDto, getAuthorizer());
+        pinMapService.createPinMap(reqPinMapCreateDto, (AuthorizerDto) projectService.getProjects(getAuthorizer()));
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
 
@@ -37,16 +43,28 @@ public class PinMapController {
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
 
-    @PostMapping("/simulate")
-    public ResponseEntity<Message> simulatePinMap(@RequestBody HashMap<String, Long> pinMapIdHash) {
-        pinMapService.simulatePinMap(pinMapIdHash.get("pinMapId"));
+    @PostMapping("/{pinMapId}")
+    public ResponseEntity<Message> createPin(@PathVariable String pinMapId, @RequestBody ReqPinCreateDto reqPinCreateDto) {
+        pinService.createPin(reqPinCreateDto, getAuthorizer());
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
 
-    @GetMapping("/simulate/read")
-    public ResponseEntity<Message> readSimulation(@RequestBody HashMap<String, Long> pinMapIdHash) {
-        return ResponseEntity.ok(new Message(StatusCode.OK, pinMapService.getSimulation(pinMapIdHash.get("pinMapId"))));
+    @PatchMapping("/{pinId}")
+    public ResponseEntity<Message> updatePin(@PathVariable Long pinId, @RequestBody ReqPinCreateDto reqPinCreateDto) {
+        pinService.updatePin(pinId, reqPinCreateDto, getAuthorizer());
+        return ResponseEntity.ok(new Message(StatusCode.OK));
     }
+
+    @GetMapping("/read/{pinMapId}")
+    public ResponseEntity<Message> readSimulation(@PathVariable Long pinMapId) {
+        return ResponseEntity.ok(new Message(StatusCode.OK, pinMapService.readPinMap(pinMapId, getAuthorizer())));
+    }
+
+    @PostMapping("/save/{pinMapId}")
+    public ResponseEntity<Message> savePinMap(@RequestBody ReqPinMapCreateDto reqPinMapCreateDto, @PathVariable Long pinMapId) {
+        pinMapService.savePinMap(pinMapId,  reqPinMapCreateDto, getAuthorizer());
+        return ResponseEntity.ok(new Message(StatusCode.OK));
+         }
 
     @GetMapping("/transfer")
     public ResponseEntity<Message> transferPinMap() {
@@ -58,5 +76,5 @@ public class PinMapController {
         pinMapService.transferPinMap(pinMapIdHash.get("pinMapId"), projectIdHash.get("projectId"));
         return ResponseEntity.ok(new Message(StatusCode.OK));
     }
-    
+
 }

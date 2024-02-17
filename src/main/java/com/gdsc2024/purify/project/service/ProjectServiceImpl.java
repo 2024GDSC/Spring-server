@@ -60,11 +60,6 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public PinMap getSimulation() {
-        return null;
-    }
-
-    @Override
     public List<ResProjectDto> getProjects(AuthorizerDto authorizerDto) {
         Member member = memberRepository.findById(authorizerDto.getMemberId()).orElseThrow(() -> {throw new CustomException(StatusCode.NOT_FOUND);});
         if (!member.getRole().name().equals(authorizerDto.getRole())) throw new CustomException(StatusCode.DISABLED_AUTH_TOKEN);

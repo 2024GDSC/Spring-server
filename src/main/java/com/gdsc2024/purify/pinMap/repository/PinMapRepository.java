@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface PinMapRepository extends JpaRepository<PinMap, Long> {
     List<PinMap> findPinMapByProject_ProjectId(Long projectId);
+
     List<PinMap> findPinMapByPinMapId(Long pinMapId);
 }

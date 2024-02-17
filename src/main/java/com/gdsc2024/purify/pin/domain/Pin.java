@@ -38,10 +38,11 @@ public class Pin extends BaseTimeEntity {
 
 
     @Builder
-    public Pin(Long pinId, PinTypes pinType, String x_location, String y_location) {
+    public Pin(Long pinId, PinTypes pinType, String x_location, String y_location, PinMap pinMap) {
         this.pinId = pinId;
         this.pinType = pinType;
         this.x_location = x_location;
         this.y_location = y_location;
+        this.pinMap = pinMap;
     }
 }
